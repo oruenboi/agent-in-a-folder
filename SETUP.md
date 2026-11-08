@@ -60,7 +60,7 @@ Codex discovers applicable `AGENTS.md` files along the path from the detected pr
 ```markdown
 # Wiki
 
-- Start with wiki/bundle/index.md. Search the bundle and open the relevant concepts and cited evidence. Cite sources and distinguish evidence, inference, gaps, and conflicts.
+- Start with wiki/bundle/index.md. Search the bundle with rg or an already configured local search tool scoped to the bundle. Open the relevant concepts and cited evidence. Cite sources and distinguish evidence, inference, gaps, and conflicts.
 - Maintain wiki/bundle/ as OKF v0.2. Every Markdown concept needs valid YAML frontmatter and a non-empty type. Use structured sources with stable IDs and resolvable resource paths or URLs. Tie sourced claims to their IDs with Markdown footnotes.
 - For requested ingest, follow raw/AGENTS.md, reuse matching evidence, and create or update a typed source note. For requested filing, update an existing concept when it covers the topic.
 - After material edits, refresh index entries and add a log entry under its ISO date. Keep date groups newest first and preserve existing entries. Verify metadata, citations, and local links before reporting completion.
@@ -125,3 +125,17 @@ Record results in the setup TODO. Mark any checks you could not run as pending.
 - **Review** “Check the wiki for broken links, missing provenance, and outdated summaries.”
 
 When sharing knowledge is authorized, review the selected concepts and their bundled evidence before distributing them. Use the OKF bundle structure for the shared selection and check its links again after removing any private material.
+
+## 7. Optional CLI tools
+
+For a small wiki, start with `wiki/bundle/index.md` and use `rg` when you need a text search. As the wiki grows, you can add QMD for local Markdown search. Its CLI supports BM25 keyword search and hybrid search with vector retrieval and local LLM reranking. It also offers an MCP server if you want Codex to call search as a tool. For narrower needs, a small script that searches titles or aliases may be enough. [QMD documentation](https://github.com/tobi/qmd)
+
+If you choose QMD, check its prerequisites, then run the following from the project root. Replace `my-project` with a unique name for this project's index.
+
+```sh
+npm install -g @tobilu/qmd
+qmd --index my-project collection add ./wiki/bundle --name wiki
+qmd --index my-project search "glossary review" -c wiki -n 5
+```
+
+Use `qmd --index my-project update` to refresh the index after changes. For hybrid search, generate vectors with `qmd --index my-project embed -c wiki` and use `query` in place of `search`. QMD can download local models on first use of those features. Open the returned Markdown and follow its OKF citations before answering. [QMD search and index maintenance](https://github.com/tobi/qmd#usage)
