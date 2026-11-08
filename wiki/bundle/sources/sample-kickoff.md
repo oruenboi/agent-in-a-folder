@@ -1,6 +1,6 @@
 ---
-type: Project Reference
-title: Sample glossary review
+type: Reference
+title: Sample project kickoff
 description: The fictional project's glossary review schedule and first deliverable.
 sources:
   - id: sample-kickoff-v1
@@ -8,8 +8,12 @@ sources:
     title: Sample project kickoff
 ---
 
-# Sample glossary review
+# Sample project kickoff
 
-The fictional team reviews the draft glossary on Tuesdays. Its first deliverable is a one-page glossary of project terms.[^sample-kickoff-v1]
+- Source ID: `sample-kickoff`
+- Revision: `v1`
+- Capture date: 2026-11-08
+
+The fictional team reviews its draft glossary on Tuesdays. Its first deliverable is a one-page glossary of project terms.[^sample-kickoff-v1]
 
 [^sample-kickoff-v1]: [Sample project kickoff](../references/sample-kickoff.v1.txt)
