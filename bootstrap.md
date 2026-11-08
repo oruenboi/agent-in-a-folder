@@ -1,13 +1,13 @@
-# Codex project setup with an OKF wiki
+# Bootstrap a Codex OKF wiki
 
 This guide gives Codex a consistent way to plan project work and answer questions from local evidence. The Markdown wiki uses Open Knowledge Format (OKF) v0.2 for all maintained knowledge. Shared instructions go in the root `AGENTS.md`, and `wiki/` and `raw/` each have scoped instructions. [OKF v0.2 specification](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md)
 
 ## 1. Set up the project
 
-Save this guide as `SETUP.md` at the root of the target project and start a Codex chat from that folder. Replace `<project-name>` in the prompt with the project name. Use `rg` for search when available, or the workspace's existing local search tool. Git is optional.
+Copy `bootstrap.md` to the root of your project and start a Codex chat from that folder. Replace `<project-name>` with your project's name when using the prompt below. Use `rg` for search when available, or the workspace's existing local search tool. Git is optional.
 
 ```text
-Set up <project-name> using SETUP.md. Preserve existing files and conventions. Record the plan and TODO first, then create or merge the folder structure and the root and nested AGENTS.md files.
+Set up <project-name> using bootstrap.md. Preserve existing files and conventions. Record the plan and TODO first, then create or merge the folder structure and the root and nested AGENTS.md files.
 
 Use wiki/bundle/ as the canonical OKF v0.2 wiki. Seed it from approved project material or the pinned public guide. Verify the OKF metadata, source links, and read-only query behavior. Report what changed and which checks passed or remain pending.
 ```
@@ -20,7 +20,7 @@ Use this starting layout for a new project. For an existing project, keep its pl
 project/
 ├── AGENTS.md                 # Shared Codex rules and folder pointers
 ├── README.md                 # Human entry point and project map
-├── SETUP.md
+├── bootstrap.md
 ├── devplan/
 │   ├── plan.md               # Active scope, design, and acceptance checks
 │   └── todo.md               # Work in progress and validation results
@@ -139,3 +139,27 @@ qmd --index my-project search "glossary review" -c wiki -n 5
 ```
 
 Use `qmd --index my-project update` to refresh the index after changes. For hybrid search, generate vectors with `qmd --index my-project embed -c wiki` and use `query` in place of `search`. QMD can download local models on first use of those features. Open the returned Markdown and follow its OKF citations before answering. [QMD search and index maintenance](https://github.com/tobi/qmd#usage)
+
+<!--
+MIT License
+
+Copyright (c) 2026 oruenboi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->

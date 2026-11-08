@@ -1,4 +1,4 @@
-# Starter setup plan
+# Wiki setup plan
 
 Create a reusable Codex workspace with scoped project instructions and one canonical Markdown knowledge bundle using OKF v0.2. Include a fictional source so users can verify citation and ingestion behavior as soon as they open the project.
 
