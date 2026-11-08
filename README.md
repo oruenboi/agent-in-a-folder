@@ -1,20 +1,34 @@
 # Codex Markdown Wiki Starter
 
-A local Codex project with shared rules in `AGENTS.md`, scoped instructions in `wiki/AGENTS.md` and `raw/AGENTS.md`, and a canonical Markdown wiki in Open Knowledge Format (OKF) v0.2.
+A GitHub template for a local, source-backed wiki that Codex can query and maintain. The wiki is a directory of Markdown files with YAML metadata in Open Knowledge Format (OKF) v0.2.
+
+## The stack
+
+| Layer | What it does |
+| --- | --- |
+| **Codex and `AGENTS.md`** | Codex reads the applicable project instructions and works with local files. The root file routes wiki work and source capture to their scoped rules. [Root rules](AGENTS.md) · [Wiki rules](wiki/AGENTS.md) · [Capture rules](raw/AGENTS.md) |
+| **Markdown, YAML, and OKF v0.2** | `wiki/bundle/` is the canonical knowledge bundle. Each concept has a YAML `type`, and sourced claims use footnotes tied to structured `sources` entries. The bundle has a curated index and a dated change log. [Wiki index](wiki/bundle/index.md) · [OKF specification](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md) |
+| **Source captures** | `raw/sources/` stores original revisions. The bundle carries byte-identical copies of approved local evidence under `wiki/bundle/references/` when a concept needs a self-contained citation. [Sample capture](raw/sources/sample-kickoff.v1.md) · [Bundled evidence](wiki/bundle/references/sample-kickoff.v1.txt) |
+| **Local search** | Start with the index and search the bundle with `rg` or an equivalent local tool. QMD is optional for indexed search, with hybrid search and MCP available when configured. [Optional CLI tools](SETUP.md#7-optional-cli-tools) |
+| **Git and GitHub** | Git records edits to instructions, concepts, and captures. GitHub's template feature gives each project its own copy. |
+
+## How it works
+
+1. **Ask a question.** Codex opens the index, finds the relevant concepts, and follows their citations to the evidence. It answers with citations, identifies gaps, and leaves the files untouched.
+2. **Ingest a source.** On request, Codex saves the approved revision, creates or updates a typed source note, and records the provenance. A repeat ingest reuses the same capture. A changed source gets a new revision-qualified file.
+3. **File a finding.** On request, Codex adds or revises a concept and cites its evidence. After a material edit, it refreshes the affected index entries, adds a dated log entry, and checks the metadata and links. [Wiki log](wiki/bundle/log.md)
 
 ## Start here
 
-1. Create a repository from this template and open its root as a local Codex project.
+1. Choose **Use this template** on GitHub, clone the new repository, and open its root in Codex.
 2. Set your project name in `AGENTS.md` and your scope in [the project plan](devplan/plan.md).
 3. Ask Codex to ingest an approved source or explore the fictional example through the [wiki index](wiki/bundle/index.md).
 
-The [setup guide](SETUP.md) explains the folder structure and how to add it to an existing project. See [optional CLI tools](SETUP.md#7-optional-cli-tools) if the wiki outgrows the index and text search.
-
-Codex reads and maintains `wiki/bundle/` as the OKF v0.2 bundle. Each concept has typed YAML frontmatter, and sourced claims point to structured provenance. `raw/` holds original captures, and the bundle carries approved local evidence needed to resolve its references. [OKF v0.2 specification](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md)
+For an existing project, follow the [setup guide](SETUP.md).
 
 ## Try it
 
-- Ask “From the wiki, when is the sample project’s glossary review? Cite the evidence.” The source records Tuesdays.
+- Ask “From the wiki, when is the sample project’s glossary review? Cite the evidence.” The expected answer is Tuesdays. Follow the footnote in the [sample source note](wiki/bundle/sources/sample-kickoff.md).
 - Ask “From the wiki, what budget was approved for the sample project?” Expect an explicit evidence gap. Check that both queries leave the working tree clean.
 - Ask “Re-ingest sample-kickoff at revision v1.” Check that the capture and source note are reused.
 
