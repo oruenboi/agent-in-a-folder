@@ -1,35 +1,34 @@
-# Codex Markdown Wiki
+# Agent in a Folder
 
-A local, source-backed wiki that Codex can query and maintain. The wiki is a directory of Markdown files with YAML metadata in Open Knowledge Format (OKF) v0.2.
+**All the software you need is an AI assistant that can already read and edit files.** Give it a folder, some documents, and a few written instructions, and it can build a wiki you can ask questions about.
 
-## The stack
+The idea started with Andrej Karpathy’s LLM Wiki. An assistant can read the material you give it, turn it into linked notes, and keep those notes useful as you add more. Because the work is saved in the folder, you can open it in a new chat or with a different assistant and pick up where you left off. [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 
-| Layer | What it does |
-| --- | --- |
-| **Codex and `AGENTS.md`** | Codex reads the applicable project instructions and works with local files. The root file routes wiki work and source capture to their scoped rules. [Root rules](AGENTS.md) · [Wiki rules](wiki/AGENTS.md) · [Capture rules](raw/AGENTS.md) |
-| **Markdown, YAML, and OKF v0.2** | `wiki/bundle/` is the canonical knowledge bundle. Each concept has a YAML `type`, and sourced claims use footnotes tied to structured `sources` entries. The bundle has a curated index and a dated change log. [Wiki index](wiki/bundle/index.md) · [OKF specification](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md) |
-| **Source captures** | `raw/sources/` stores original revisions. The bundle carries byte-identical copies of approved local evidence under `wiki/bundle/references/` when a concept needs a self-contained citation. [Sample capture](raw/sources/sample-kickoff.v1.md) · [Bundled evidence](wiki/bundle/references/sample-kickoff.v1.txt) |
-| **Local search** | Start with the index and search the bundle with `rg` or an equivalent local tool. QMD is optional for indexed search, with hybrid search and MCP available when configured. [Optional CLI tools](bootstrap.md#7-optional-cli-tools) |
-| **Git** | Tracks changes to instructions, concepts, and captures when you keep the wiki in a repository. |
+## Try it with the sample notes
+
+1. Download or copy this folder and give your AI assistant access to it.
+2. Ask it, “Read `AGENTS.md`. When does the sample project review its glossary? Show me where you found the answer.”
+3. It should answer **Tuesdays** and point you to the source. Try asking what budget was approved to see how it handles a detail the notes leave open. [Sample wiki note](wiki/bundle/sources/sample-kickoff.md) · [Original evidence](wiki/bundle/references/sample-kickoff.v1.txt)
+
+To add the same setup to a project you already use, copy [bootstrap.md](bootstrap.md) into that folder and tell your assistant, “Set up this project using `bootstrap.md`.”
 
 ## How it works
 
-1. **Ask a question.** Codex opens the index, finds the relevant concepts, and follows their citations to the evidence. It answers with citations, identifies gaps, and leaves the files untouched.
-2. **Ingest a source.** On request, Codex saves the approved revision, creates or updates a typed source note, and records the provenance. A repeat ingest reuses the same capture. A changed source gets a new revision-qualified file.
-3. **File a finding.** On request, Codex adds or revises a concept and cites its evidence. After a material edit, it refreshes the affected index entries, adds a dated log entry, and checks the metadata and links. [Wiki log](wiki/bundle/log.md)
+**Add something.** Give the assistant a document and ask it to add it to the wiki. It saves the original and writes a shorter note that points back to it. If the document changes later, the assistant can keep both versions so you can see what changed.
 
-## Use it
+**Ask a question.** The assistant starts with the wiki’s list of topics, opens the relevant notes, and checks their sources. If you ask what was decided in a meeting, it can answer and point to the original record. Questions leave the saved files alone.
 
-- **Copy the project.** Clone or download this repository and open its root in Codex. The instructions and sample wiki are ready to use. Set your scope in the [project plan](devplan/plan.md).
-- **Add the wiki to an existing project.** Copy [bootstrap.md](bootstrap.md) to that project's root and tell Codex, “Set up this project using `bootstrap.md`.” The file contains the layout, instruction templates, and verification steps.
+**Save a finding.** If an answer is worth keeping, ask the assistant to save it in the wiki. It adds or updates a note, links the evidence, and records what changed. [Wiki log](wiki/bundle/log.md)
 
-## Try it
+## What’s in the folder
 
-- Ask “From the wiki, when is the sample project’s glossary review? Cite the evidence.” The expected answer is Tuesdays. Follow the footnote in the [sample source note](wiki/bundle/sources/sample-kickoff.md).
-- Ask “From the wiki, what budget was approved for the sample project?” Expect an explicit evidence gap. Check that both queries leave the working tree clean.
-- Ask “Re-ingest sample-kickoff at revision v1.” Check that the capture and source note are reused.
+| File or folder | What it does |
+| --- | --- |
+| **Instructions** | `AGENTS.md` is the starting point. It sends the assistant to the wiki rules for questions and updates, and to the capture rules when adding a source. [Root rules](AGENTS.md) · [Wiki rules](wiki/AGENTS.md) · [Capture rules](raw/AGENTS.md) |
+| **Original material** | `raw/sources/` holds saved versions of the documents you add. The wiki can carry an approved copy of a source when it needs to travel as a self-contained bundle. [Sample capture](raw/sources/sample-kickoff.v1.md) |
+| **Wiki** | `wiki/bundle/` holds the index and linked notes as Markdown text files. It uses Open Knowledge Format (OKF) v0.2 to record each note’s type and sources in a consistent way. [Wiki index](wiki/bundle/index.md) · [OKF specification](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md) |
 
-Record the results in [the setup checklist](devplan/todo.md).
+The index and ordinary file lookup are enough to get started. For a larger wiki, the guide covers QMD and other optional search tools. You can also use Git to track changes if you keep the folder in a repository. [Optional CLI tools](bootstrap.md#7-optional-cli-tools)
 
 ## Credits
 

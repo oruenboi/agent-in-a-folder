@@ -8,5 +8,6 @@
 - [x] Explain the stack and daily workflows in the README and verify its links against the template.
 - [x] Credit the three upstream sources in the README and verify their links.
 - [x] Add the MIT license and verify both the copy-ready project and the standalone bootstrap guide.
-- [ ] In a fresh Codex chat, ask the supported and unsupported questions from the README and check that the working tree stays clean.
+- [x] Rename the project to Agent in a Folder and verify the plain-language README and portable bootstrap.
+- [ ] In a fresh assistant session, ask the supported and unsupported questions from the README and check that the working tree stays clean.
 - [ ] Re-ingest the sample revision and confirm the capture and source note are reused.

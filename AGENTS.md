@@ -1,4 +1,4 @@
-# Codex Markdown Wiki
+# Agent in a Folder
 
 - Preserve existing work. Before implementation, read the active plan and TODO. Update the TODO as work completes and record validation results.
 - Paths are relative to the project root. For wiki questions or edits, read wiki/AGENTS.md. For source-capture work, read raw/AGENTS.md.
