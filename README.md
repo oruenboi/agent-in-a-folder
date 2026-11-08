@@ -33,3 +33,9 @@ For an existing project, follow the [setup guide](SETUP.md).
 - Ask “Re-ingest sample-kickoff at revision v1.” Check that the capture and source note are reused.
 
 Record the results in [the setup checklist](devplan/todo.md).
+
+## Credits
+
+- Andrej Karpathy’s pattern for turning raw sources into a wiki that an agent maintains over time. [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+- Google Cloud’s specification for portable Markdown knowledge bundles and structured provenance. [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format/tree/main)
+- Vivian Balakrishnan’s design for retrieving relevant context from linked, sourced OKF knowledge. [OKF Graph Wiki](https://gist.github.com/VivianBalakrishnan/83d1ea5f929d0ae51bca7fe25129b0d7)
